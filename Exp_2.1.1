@@ -1,0 +1,69 @@
+# promlem no 78
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int sz=1<<nums.size();
+        vector<vector<int>> res(sz);
+        int idx;int temp;
+        for(int i=0;i<sz;i++){
+            idx=0;temp=i;
+            while(temp!=0){
+                if(temp%2)res[i].push_back(nums[idx]);
+                temp/=2;idx++;
+            }
+        }
+       return res;
+    }
+};
+
+
+
+# promlem no 258
+
+class Solution {
+public:
+    int addDigits(int num) {
+        int sum = 0;
+        while (num != 0) {
+            sum += num % 10;
+            num /= 10;
+            if (num == 0 && sum > 9) {
+                num = sum;
+                sum = 0;
+            }
+        }
+        return sum;
+    }
+};
+
+
+# promlem no 287
+
+class Solution {
+public:
+    int findDuplicate(std::vector<int>& nums) {
+        int left = 1;
+        int right = nums.size() - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            int count = 0;
+
+            // Count the numbers less than or equal to mid
+            for (int num : nums) {
+                if (num <= mid) {
+                    count++;
+                }
+            }
+
+            // If count is greater than mid, the duplicate lies in the left half
+            if (count > mid) {
+                right = mid;
+            } else { // Otherwise, it lies in the right half
+                left = mid + 1;
+            }
+        }
+
+        return left;
+    }
+};
